@@ -1,23 +1,35 @@
 package com.dzm.app.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.io.Serial;
 import java.util.Objects;
 import java.util.Set;
 
 @Entity
-@Table(name = "company")
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Table(name = "company")
+@Builder
 public class Company extends AbstractEntity {
     @Serial
     private static final long serialVersionUID = 1L;
 
-    @OneToMany(mappedBy = "company")
+    @Column(name = "company_name")
+    private String companyName;
+
+    @OneToMany(mappedBy = "company",cascade = CascadeType.ALL)
     private Set<Station> stations;
+
+    public void setStations(Set<Station> stations) {
+        stations.forEach(station -> station.setCompany(this));
+        this.stations = stations;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -26,8 +38,4 @@ public class Company extends AbstractEntity {
         return getId() != null && getId().equals(((Company) o).getId());
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(stations);
-    }
 }
