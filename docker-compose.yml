@@ -1,0 +1,26 @@
+version: '3.1'
+services:
+  app:
+    build:
+      context: app/src/main/docker
+      dockerfile: Dockerfile
+    container_name: app-dzm
+    ports:
+      - 8080:8080
+    depends_on:
+      - db
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db-dzm:5432/db-dzm
+      - SPRING_DATASOURCE_USERNAME=admin
+      - SPRING_DATASOURCE_PASSWORD=admin
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+      - SPRING_DATASOURCE_PLATFORM=org.hibernate.dialect.PostgreSQL94Dialect
+  db:
+    image: 'postgres:11'
+    container_name: db-dzm
+    ports:
+      - 5432:5432/tcp
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=admin
+      - POSTGRES_DB=db-dzm

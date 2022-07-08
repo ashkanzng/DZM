@@ -24,19 +24,22 @@ public class PostConstructCompanyBean {
 
     @PostConstruct
     public void init() {
+        companyRepository.deleteAll();
         if (companyRepository.findAll().isEmpty()) {
             log.info("Creating dummy data");
             Station stationA = Station.builder()
-                    .stationName("s 1")
+                    .stationName("Station 1")
                     .latitude(40.17723058095113)
                     .longitude(44.511008166268056).build();
+
             Company companyB = Company.builder().companyName("B").build();
             companyB.setStations(Set.of(stationA));
             Company companyA = Company.builder().companyName("A").build();
-            companyRepository.save(companyB);
+
+            companyA.setCompanies(Set.of(companyB));
             companyRepository.save(companyA);
         } else {
-            log.info("Dummy data already inserted");
+            log.warn("Dummy data already inserted");
         }
     }
 }

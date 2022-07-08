@@ -1,5 +1,6 @@
 package com.dzm.app.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -23,6 +24,14 @@ public class Company extends AbstractEntity {
     @Column(name = "company_name")
     private String companyName;
 
+    @ManyToOne
+    @JoinColumn(name="parent_id")
+    @JsonIgnore
+    private Company parentCompany;
+
+    @OneToMany(mappedBy = "parentCompany",cascade = CascadeType.ALL)
+    private Set<Company> companies;
+
     @OneToMany(mappedBy = "company",cascade = CascadeType.ALL)
     private Set<Station> stations;
 
@@ -31,11 +40,17 @@ public class Company extends AbstractEntity {
         this.stations = stations;
     }
 
+    public void setCompanies(Set<Company> companies) {
+        companies.stream()
+                .filter(company -> !Objects.equals(company, this))
+                .forEach(company -> company.setParentCompany(this));
+        this.companies = companies;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Company)) return false;
         return getId() != null && getId().equals(((Company) o).getId());
     }
-
 }
