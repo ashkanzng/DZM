@@ -1,0 +1,12 @@
+server:
+  port: 8080
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/db-dzm
+    username: admin
+    password: admin
+  jpa:
+    database-platform : org.hibernate.dialect.PostgreSQL94Dialect
+    generate-ddl: true
+    hibernate:
+      ddl-auto: update
