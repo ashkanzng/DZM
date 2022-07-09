@@ -32,3 +32,9 @@ build/
 ### VS Code ###
 .vscode/
 .idea/
+
+../.idea/
+../README.md
+.mvn/
+mvnw
+mvnw.cmd
