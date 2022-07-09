@@ -55,4 +55,8 @@ public class Company extends AbstractEntity {
         if (!(o instanceof Company)) return false;
         return getId() != null && getId().equals(((Company) o).getId());
     }
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
+    }
 }

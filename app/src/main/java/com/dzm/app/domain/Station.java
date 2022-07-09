@@ -40,5 +40,9 @@ public class Station extends AbstractEntity {
         if (!(o instanceof Station)) return false;
         return getId() != null && getId().equals(((Station)o).getId());
     }
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
+    }
 
 }
