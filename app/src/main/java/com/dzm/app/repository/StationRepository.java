@@ -11,7 +11,7 @@ import java.util.List;
 @Repository
 public interface StationRepository extends JpaRepository<Station, Long> {
 
-    @Query(value = "SELECT station_name FROM (SELECT *,( 6371 * acos(cos(radians(:latitude)) * cos(radians(latitude)) * cos(radians(longitude) - radians(:longitude)) " +
+    @Query(value = "SELECT * FROM (SELECT *,( 6371 * acos(cos(radians(:latitude)) * cos(radians(latitude)) * cos(radians(longitude) - radians(:longitude)) " +
             " + sin(radians(:latitude)) * sin(radians(latitude )))) AS distance FROM station ORDER BY distance) as dis where distance < :radius", nativeQuery = true)
-    List<String> findAllNearest(@Param("latitude") Double latitude, @Param("longitude") Double longitude, @Param("radius") int radius );
+    List<Station> findAllNearest(@Param("latitude") Double latitude, @Param("longitude") Double longitude, @Param("radius") int radius );
 }

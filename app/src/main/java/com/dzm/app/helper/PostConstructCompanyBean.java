@@ -24,7 +24,7 @@ public class PostConstructCompanyBean {
 
     @PostConstruct
     public void init() {
-        companyRepository.deleteAll();
+        //companyRepository.deleteAll();
         if (companyRepository.findAll().isEmpty()) {
             log.info("Creating dummy data");
 
@@ -46,12 +46,21 @@ public class PostConstructCompanyBean {
                     .longitude(44.502678986048124)
                     .build();
 
-            Company companyB = Company.builder().companyName("B").build();
-            companyB.setStations(Set.of(stationA,stationB,stationC));
+            Station stationD = Station.builder()
+                    .stationName("Station Khanjyan")
+                    .latitude(40.17397571525264)
+                    .longitude(44.518394954848425)
+                    .build();
 
             Company companyA = Company.builder().companyName("A").build();
-            companyA.setCompanies(Set.of(companyB));
+            Company companyB = Company.builder().companyName("B").build();
+            Company companyC = Company.builder().companyName("C").build();
+            Company companyD = Company.builder().companyName("D").build();
+            companyB.setCompanies(Set.of(companyC,companyD));
+            companyC.setStations(Set.of(stationA,stationB,stationC));
+            companyD.setStations(Set.of(stationD));
 
+            companyA.setCompanies(Set.of(companyB));
             companyRepository.save(companyA);
         } else {
             log.warn("Dummy data already inserted");
