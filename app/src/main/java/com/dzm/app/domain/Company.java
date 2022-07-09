@@ -11,13 +11,15 @@ import java.io.Serial;
 import java.util.Objects;
 import java.util.Set;
 
-@Entity
-@Data
+
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "company")
 @Builder
+@Entity
+@Data
+@Table(name = "company")
 public class Company extends AbstractEntity {
+
     @Serial
     private static final long serialVersionUID = 1L;
 

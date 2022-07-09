@@ -1,8 +1,6 @@
 package com.dzm.app.domain;
 
 import java.io.Serial;
-import java.util.Objects;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -10,11 +8,11 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Entity
-@Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@Entity
+@Data
 @Table(name = "station")
 public class Station extends AbstractEntity {
 
