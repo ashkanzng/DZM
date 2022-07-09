@@ -1,8 +1,8 @@
 package com.dzm.app.domain;
 
-import jakarta.persistence.*;
 import lombok.Data;
 
+import javax.persistence.*;
 import java.io.Serial;
 import java.io.Serializable;
 
