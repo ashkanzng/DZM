@@ -2,6 +2,7 @@ package com.dzm.app.rest;
 
 import com.dzm.app.domain.Company;
 import com.dzm.app.domain.Station;
+import com.dzm.app.dto.CompanyDto;
 import com.dzm.app.dto.SearchRequestDto;
 import com.dzm.app.repository.CompanyRepository;
 import com.dzm.app.service.CompanyService;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/api")
@@ -45,8 +47,11 @@ public class CompanyResource {
     }
 
     @PostMapping(value = "company",consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Company> addCompany(@RequestBody Company company) {
-        return ResponseEntity.ok(companyService.createCompany(company));
+    public ResponseEntity<Company> addCompany(@RequestBody CompanyDto companyDto) {
+        Company company = new Company();
+        company.setStations(companyDto.getStations());
+        company.setCompanyName(companyDto.getCompanyName());
+        return ResponseEntity.ok(companyService.createCompany(company,companyDto.getParentCompanyId()));
     }
 
     @PostMapping(value = "find-nearest-station", consumes = MediaType.APPLICATION_JSON_VALUE)

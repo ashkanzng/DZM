@@ -19,7 +19,8 @@ public class CompanyService {
         return companyRepository.findAll();
     }
 
-    public Company createCompany (Company company) {
+    public Company createCompany (Company company,long parentCompanyId) {
+        companyRepository.findById(parentCompanyId).ifPresent(company::setParentCompany);
         return companyRepository.save(company);
     }
 }
