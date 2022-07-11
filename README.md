@@ -2,8 +2,8 @@
 
 ### Reference Documentation
 Requirements
-* docker
-* docker-compose
+* docker (https://docs.docker.com)
+* docker-compose (https://docs.docker.com/compose/install)
 
 ### Start project with Docker (recommended)
 Running project with docker:
