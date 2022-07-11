@@ -10,10 +10,10 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 @Service
 public class StationService {
+
     private final StationRepository stationRepository;
     private final CompanyRepository companyRepository;
 
@@ -25,7 +25,7 @@ public class StationService {
     public Optional<Station> findNearestStations(Long companyId,Double latitude, Double longitude,int radius){
         Set<Station> companyStations = new HashSet<>();
         companyRepository.findById(companyId).ifPresent(company -> findAllCompanyStationIncludeChildren(companyStations,company));
-        List<Station> nearestStations = stationRepository.findAllNearest(latitude,longitude,radius);
+        final List<Station> nearestStations = stationRepository.findAllNearest(latitude,longitude,radius);
         return nearestStations.stream().filter(station -> companyStations.contains(station)).findFirst();
     }
 
