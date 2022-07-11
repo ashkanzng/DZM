@@ -7,7 +7,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
-//@ComponentScan({"com.dzm*"})
 public class AppApplication {
 	private static final Logger log = LoggerFactory.getLogger(AppApplication.class);
 	public static void main(String[] args) {
