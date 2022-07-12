@@ -16,7 +16,9 @@ Running project with docker:
 ### Start project without Docker
 * git clone https://github.com/ashkanzng/DZM.git
 * cd DZM/app
-* docker run -d --name db-dzm -e POSTGRES_USER=admin -e POSTGRES_PASSWORD=admin -e POSTGRES_DB=db-dzm -p 5432:5432 postgres:11
+* install Java 17
+* If you don't have local postgres use docker
+  * docker run -d --name db-dzm -e POSTGRES_USER=admin -e POSTGRES_PASSWORD=admin -e POSTGRES_DB=db-dzm -p 5432:5432 postgres:11
 * ./mvnw spring-boot:run
 * open http://localhost:8080/swagger-ui/index.html#/company-resource
 
