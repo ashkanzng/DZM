@@ -12,6 +12,6 @@ import lombok.NoArgsConstructor;
 public class SearchRequestDto {
     private Double latitude;
     private Double longitude;
-    private int radius;
-    private long companyId;
+    private Integer radius;
+    private Long companyId;
 }

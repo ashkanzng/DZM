@@ -22,9 +22,13 @@ public class StationService {
         this.companyRepository = companyRepository;
     }
 
-    public Optional<Station> findNearestStations(Long companyId,Double latitude, Double longitude,int radius){
+    public Optional<Station> findNearestStations(Long companyId,Double latitude, Double longitude,Integer radius){
         Set<Station> companyStations = new HashSet<>();
-        companyRepository.findById(companyId).ifPresent(company -> findAllCompanyStationIncludeChildren(companyStations,company));
+        if (companyId == null){
+            companyStations.addAll(stationRepository.findAll());
+        }else {
+            companyRepository.findById(companyId).ifPresent(company -> findAllCompanyStationIncludeChildren(companyStations,company));
+        }
         final List<Station> nearestStations = stationRepository.findAllNearest(latitude,longitude,radius);
         return nearestStations.stream().filter(station -> companyStations.contains(station)).findFirst();
     }
