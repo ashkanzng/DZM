@@ -1,16 +1,12 @@
 package com.dzm.app.rest;
 
-import com.dzm.app.domain.Company;
 import com.dzm.app.domain.Station;
 import com.dzm.app.dto.CompanyDto;
 import com.dzm.app.dto.SearchRequestDto;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mockito;
-import static org.hamcrest.Matchers.hasItem;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -47,11 +43,11 @@ class CompanyResourceTest {
     @Test
     void addCompany() throws Exception {
         Station station = Station.builder()
-                .stationName("Station Republic Square")
-                .latitude(40.177391879910395)
-                .longitude(44.51295960190806)
+                .stationName("Station Sayat-Nova")
+                .latitude(40.18064923465752)
+                .longitude(44.52301512875924)
                 .build();
-        CompanyDto companyDto = CompanyDto.builder().companyName("Company A").stations(Set.of(station)).build();
+        CompanyDto companyDto = CompanyDto.builder().companyName("HYUNDAI").stations(Set.of(station)).build();
         ObjectMapper mapper = new ObjectMapper();
         mapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
         mockMvc.perform(MockMvcRequestBuilders.post(API_URL_COMPANY).contentType(MediaType.APPLICATION_JSON).content(mapper.writeValueAsString(companyDto))).andExpect(status().isOk());
