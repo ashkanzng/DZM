@@ -57,6 +57,6 @@ public class Company extends AbstractEntity {
     }
     @Override
     public int hashCode() {
-        return getClass().hashCode();
+        return Objects.hash(this.getId());
     }
 }

@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serial;
+import java.util.Objects;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -42,7 +43,7 @@ public class Station extends AbstractEntity {
     }
     @Override
     public int hashCode() {
-        return getClass().hashCode();
+        return Objects.hashCode(this.getId());
     }
 
 }
