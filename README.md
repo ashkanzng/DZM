@@ -22,4 +22,7 @@ Running project with docker:
 * ./mvnw spring-boot:run
 * open http://localhost:8080/swagger-ui/index.html#/company-resource
 
+### Description
 
+Database already includes some data (companies,stations) 
+placed in yerevan area, But you can add company and stations.  
