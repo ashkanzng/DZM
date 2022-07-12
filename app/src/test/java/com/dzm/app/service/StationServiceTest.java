@@ -24,5 +24,6 @@ class StationServiceTest {
     void findNearestStations() {
         Optional<Station> station = stationService.findNearestStations(null,40.17789813736282,44.50408223162574,50);
         assertTrue(station.isPresent());
+        assertEquals(station.get().getStationName(),"Station Paronyan");
     }
 }
